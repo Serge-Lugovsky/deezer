@@ -1,0 +1,9 @@
+*.iml
+*.log
+.idea
+.allure
+*target
+*allure-results
+*.properties
+*chromedriver
+*geckodriver
