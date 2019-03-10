@@ -1,5 +1,6 @@
 package Base;
 
+import DeezerAPI.MyActivityAPI;
 import Managers.AppManager;
 import Managers.SingletonAppManager;
 import Models.User;
@@ -14,7 +15,7 @@ import org.testng.annotations.BeforeSuite;
 
 import static Utils.AllureEnvironmentWriter.setAllureEnvironment;
 
-public class TestBase {
+public class TestBase extends MyActivityAPI {
     public AppManager app = SingletonAppManager.getInstance().manager;
     private static Cookie sessionId;
 

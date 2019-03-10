@@ -16,4 +16,8 @@ public class NavigationHelper extends PageManager {
         accountPage.moveToMyInformationMenu();
     }
 
+    public void goToMyMusicPlaylistMenu(){
+        mainPage.moveToPlaylistMenu();
+    }
+
 }

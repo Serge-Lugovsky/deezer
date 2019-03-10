@@ -2,6 +2,8 @@ package Managers;
 
 import Models.User;
 
+import java.util.List;
+
 public class UserHelper extends PageManager {
 
     UserHelper(AppManager manager){
@@ -21,6 +23,18 @@ public class UserHelper extends PageManager {
 
     public boolean checkLogout(){
         return homePage.verifyLogout();
+    }
+
+    public void createPlaylist(String name, String desc){
+        myMusicPage
+                .openCreatePlaylistPopup()
+                .inputPlaylistName(name)
+                .inputPlaylistDescriptions(desc)
+                .clickCreatePlaylist();
+    }
+
+    public List<String> getListOfPlaylistNames(){
+        return myMusicPage.getListPlaylistName();
     }
 
     public void logoutFromAccount(){

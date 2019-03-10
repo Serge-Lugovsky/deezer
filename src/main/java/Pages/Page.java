@@ -15,7 +15,7 @@ public abstract class Page {
 
     Page(PageManager pages){
         driver = pages.getDriver();
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 7);
         actions = new Actions(driver);
         jse = (JavascriptExecutor) driver;
     }

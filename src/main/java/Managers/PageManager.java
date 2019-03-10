@@ -12,6 +12,8 @@ public class PageManager {
     LoginPage loginPage;
     MainPage mainPage;
     AccountPage accountPage;
+    MyMusicPage myMusicPage;
+    PlayListPage playListPage;
 
 
     PageManager(WebDriver driver){
@@ -20,6 +22,8 @@ public class PageManager {
         loginPage = initElements(new LoginPage(this));
         mainPage = initElements(new MainPage(this));
         accountPage = initElements(new AccountPage(this));
+        myMusicPage = initElements(new MyMusicPage(this));
+        playListPage = initElements(new PlayListPage(this));
     }
 
     private <T extends Page> T initElements(T page){

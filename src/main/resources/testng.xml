@@ -2,9 +2,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Deezer" verbose="1">
-    <test name="Check link test">
+    <test name="Check user information test">
         <classes>
             <class name="UserInfoTest"/>
+        </classes>
+    </test>
+    <test name="Check playlist test">
+        <classes>
+            <class name="PlaylistTest"/>
         </classes>
     </test>
 

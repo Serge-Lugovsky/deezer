@@ -19,4 +19,8 @@ public class AttributeHelper extends PageManager {
         return user.getUserInfoList();
     }
 
+    public String getNameOfCreatedPlaylist(){
+        return playListPage.getPlaylistName();
+    }
+
 }
