@@ -12,13 +12,13 @@ public class LoginPage extends Page {
         super(pages);
     }
 
-    @FindBy(xpath = "//input[@type='email']")
+    @FindBy(xpath = "(//input)[1]")
     private WebElement emailField;
 
-    @FindBy(xpath = "//input[@type='password']")
+    @FindBy(xpath = "(//input)[2]")
     private WebElement passwordField;
 
-    @FindBy(xpath = "//button/span[text()='Log in']")
+    @FindBy(xpath = "//button[@id='login_form_submit']")
     private WebElement loginButton;
 
     @Step("Entry email")

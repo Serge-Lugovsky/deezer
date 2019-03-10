@@ -13,25 +13,25 @@ public class MainPage extends Page {
         super(pages);
     }
 
-    @FindBy(xpath = "//button[contains(@class, 'topbar-profile')]")
+    @FindBy(xpath = "//button[@class='topbar-profile']")
     private WebElement profileButton;
 
-    @FindBy(xpath = "//a/span[text()='Account Settings']")
+    @FindBy(xpath = "//a[@href='/account']")
     private WebElement accountSettingsLink;
 
-    @FindBy(xpath = "//a/span[text()='Log out']")
+    @FindBy(xpath = "(//a/span)[3]")
     private WebElement logoutLink;
 
-    @FindBy(xpath = "//a//span[text()='Playlists']")
+    @FindBy(xpath = "(//a[@class='sidebar-nav-link'])[2]")
     private WebElement playlistButton;
 
-    @Step(value = "Check login")
+    @Step("Check login")
     public boolean verifyLogin(){
         wait.until(ExpectedConditions.elementToBeClickable(profileButton));
         return profileButton.isDisplayed();
     }
 
-    @Step(value = "Open profile menu")
+    @Step("Open profile menu")
     public MainPage openProfileMenu(){
         wait.until(ExpectedConditions.elementToBeClickable(profileButton));
         profileButton.click();
@@ -44,7 +44,7 @@ public class MainPage extends Page {
         accountSettingsLink.click();
     }
 
-    @Step(value = "Logout")
+    @Step("Logout")
     public void logout(){
         wait.until(ExpectedConditions.elementToBeClickable(logoutLink));
         logoutLink.click();

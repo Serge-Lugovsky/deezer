@@ -14,7 +14,7 @@ public class AccountPage extends Page {
         super(pages);
     }
 
-    @FindBy(xpath = "//a[text()='My information']")
+    @FindBy(xpath = "(//nav//a)[1]")
     private WebElement myInformationMenuLink;
 
     @FindBy(xpath = "//input[@class='form-control']|//select|//input[@name='sex']")

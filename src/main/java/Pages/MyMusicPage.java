@@ -18,13 +18,13 @@ public class MyMusicPage extends Page {
     @FindBy(xpath = "//button[@class='create-assistant-container']")
     private WebElement createPlaylistButton;
 
-    @FindBy(xpath = "//input[@placeholder='Playlist name']")
+    @FindBy(xpath = "//input[@type='text']")
     private WebElement playlistNameField;
 
     @FindBy(xpath = "//textarea")
     private WebElement listDescriptionsField;
 
-    @FindBy(xpath = "//button/span[text()='Create']")
+    @FindBy(xpath = "//button[@id='modal_playlist_assistant_submit']")
     private WebElement createButtonOnPopup;
 
     @FindBy(xpath = "(//li//div//a)")

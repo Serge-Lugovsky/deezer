@@ -12,7 +12,7 @@ public class HomePage extends Page {
         super(pages);
     }
 
-    @FindBy(xpath = "//a/span[text()='Log in']")
+    @FindBy(xpath = "(//a[starts-with(@href, '/login')])[1]")
     private WebElement loginLink;
 
     @Step("Move to login page")
@@ -21,7 +21,7 @@ public class HomePage extends Page {
         loginLink.click();
     }
 
-    @Step(value = "Check logout")
+    @Step("Check logout")
     public boolean verifyLogout(){
         wait.until(ExpectedConditions.elementToBeClickable(loginLink));
         return loginLink.isDisplayed();
