@@ -12,5 +12,10 @@
             <class name="PlaylistTest"/>
         </classes>
     </test>
+    <test name="Check search test">
+        <classes>
+            <class name="SearchTest"/>
+        </classes>
+    </test>
 
 </suite>

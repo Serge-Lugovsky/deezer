@@ -50,4 +50,9 @@ public class UserHelper extends PageManager {
                 .logout();
     }
 
+    @Step("Search tracks")
+    public void searchMusic(String searchData){
+        mainPage.searchTracks(searchData);
+    }
+
 }

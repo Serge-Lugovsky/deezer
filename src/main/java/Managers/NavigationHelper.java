@@ -25,4 +25,9 @@ public class NavigationHelper extends PageManager {
         mainPage.moveToPlaylistMenu();
     }
 
+    @Step("Move to artist search menu")
+    public void goToArtistSearchMenu(){
+        searchPage.moveToArtistSearchMenu();
+    }
+
 }

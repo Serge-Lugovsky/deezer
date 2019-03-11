@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.*;
 
+import static Utils.JsAndJqueryWaiter.waitJsAndJQueryLoad;
+
 public class AccountPage extends Page {
 
     public AccountPage(PageManager pages){
@@ -29,7 +31,7 @@ public class AccountPage extends Page {
     @Step("Get user data")
     public List<String> getAllUserInputData(){
         List<String> dataList = new ArrayList<>();
-
+        waitJsAndJQueryLoad(jse, wait);
         for (WebElement elm: userDataInputList){
             jse.executeScript("arguments[0].scrollIntoView(true);", elm);
             if (elm.getAttribute("type").equals("radio")){

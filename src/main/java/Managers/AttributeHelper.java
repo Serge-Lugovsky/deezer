@@ -27,4 +27,14 @@ public class AttributeHelper extends PageManager {
         return playListPage.getPlaylistName();
     }
 
+    @Step("Get search result text")
+    public String getSearchConfirmText(){
+        return searchPage.getSearchResultText();
+    }
+
+    @Step("Get name artist after search")
+    public String getNameArtist(){
+        return searchPage.getArtistNameAfterSearch();
+    }
+
 }

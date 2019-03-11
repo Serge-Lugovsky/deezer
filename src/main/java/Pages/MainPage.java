@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+
 public class MainPage extends Page {
 
     public MainPage(PageManager pages){
@@ -24,6 +25,21 @@ public class MainPage extends Page {
 
     @FindBy(xpath = "(//a[@class='sidebar-nav-link'])[2]")
     private WebElement playlistButton;
+
+    @FindBy(xpath = "//input[@type='search']")
+    private WebElement searchField;
+
+    @FindBy(xpath = "//button[@class='topbar-search-submit']")
+    private WebElement searchButton;
+
+    @Step("Search tracks")
+    public void searchTracks(String searchData){
+        wait.until(ExpectedConditions.elementToBeClickable(searchField));
+        searchField.clear();
+        searchField.sendKeys(searchData);
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton));
+        searchButton.click();
+    }
 
     @Step("Check login")
     public boolean verifyLogin(){

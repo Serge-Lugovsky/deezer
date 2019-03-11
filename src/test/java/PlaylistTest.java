@@ -14,7 +14,7 @@ public class PlaylistTest extends TestBase {
 
     @Description(value = "Create playlist test")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Create playlist", groups = {"playlistOperation"})
+    @Test(description = "Create playlist", groups = {"playlistOperation"}, priority = 1)
     public void createPlaylistTest(){
         app.getNavigationHelper().goToMyMusicPlaylistMenu();
         app.getUserHelper().createPlaylist(playlistName, playlistDescription);
