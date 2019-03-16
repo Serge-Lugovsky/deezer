@@ -7,14 +7,14 @@
             <class name="UserInfoTest"/>
         </classes>
     </test>
-    <test name="Check playlist test">
-        <classes>
-            <class name="PlaylistTest"/>
-        </classes>
-    </test>
     <test name="Check search test">
         <classes>
             <class name="SearchTest"/>
+        </classes>
+    </test>
+    <test name="Check playlist test">
+        <classes>
+            <class name="PlaylistTest"/>
         </classes>
     </test>
 

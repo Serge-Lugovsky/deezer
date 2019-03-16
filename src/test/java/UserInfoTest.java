@@ -12,7 +12,7 @@ public class UserInfoTest extends TestBase {
 
     @Description(value = "Check user personal information")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Check user data")
+    @Test(description = "Check user data", groups = {"UIOperation"})
     public void userInfoTest(){
         app.getNavigationHelper().goToMyInfoMenu();
         Assert.assertEquals(app.getAttributeHelper().getActualUserInfoList(),

@@ -27,8 +27,8 @@ public class MyMusicPage extends Page {
     @FindBy(xpath = "//button[@id='modal_playlist_assistant_submit']")
     private WebElement createButtonOnPopup;
 
-    @FindBy(xpath = "(//li//div//a)")
-    private List<WebElement> playlistName;
+    @FindBy(xpath = "//li//div//a")
+    private List<WebElement> allUserPlaylistLinks;
 
     @Step("Open create playlist popup")
     public MyMusicPage openCreatePlaylistPopup(){
@@ -62,11 +62,23 @@ public class MyMusicPage extends Page {
     @Step("Get all playlist names")
     public List<String> getListPlaylistName(){
         List<String> listOfNames = new ArrayList<>();
-        for (WebElement elem : playlistName){
+        for (WebElement elem : allUserPlaylistLinks){
             jse.executeScript("arguments[0].scrollIntoView(false);", elem);
             listOfNames.add(elem.getText());
         }
         return listOfNames;
+    }
+
+    @Step("Open playlist after added tracks")
+    public void openCreatedPlaylist(String createdPlaylistName){
+        for (WebElement element: allUserPlaylistLinks){
+            jse.executeScript("arguments[0].scrollIntoView(true);", element);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            if (element.getText().equalsIgnoreCase(createdPlaylistName)){
+                element.click();
+                break;
+            }
+        }
     }
 
 }

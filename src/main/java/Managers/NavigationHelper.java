@@ -20,7 +20,7 @@ public class NavigationHelper extends PageManager {
         accountPage.moveToMyInformationMenu();
     }
 
-    @Step("Go to Playlists menu")
+    @Step("Go to all playlists")
     public void goToMyMusicPlaylistMenu(){
         mainPage.moveToPlaylistMenu();
     }

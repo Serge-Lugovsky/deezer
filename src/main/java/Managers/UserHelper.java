@@ -3,7 +3,6 @@ package Managers;
 import Models.User;
 import io.qameta.allure.Step;
 
-import java.util.List;
 
 public class UserHelper extends PageManager {
 
@@ -38,11 +37,6 @@ public class UserHelper extends PageManager {
                 .clickCreatePlaylist();
     }
 
-    @Step("Get all user playlist name")
-    public List<String> getListOfPlaylistNames(){
-        return myMusicPage.getListPlaylistName();
-    }
-
     @Step("Logout from account")
     public void logoutFromAccount(){
         mainPage
@@ -55,4 +49,13 @@ public class UserHelper extends PageManager {
         mainPage.searchTracks(searchData);
     }
 
+    @Step("Add tracks to playlist")
+    public void addTracksToCreatedPlaylist(String playlistName, int elemNmb){
+        searchPage.openTracksContextMenuForAddToPlaylist(playlistName, elemNmb);
+    }
+
+    @Step("Open playlist")
+    public void openPlaylist(String playlistName){
+        myMusicPage.openCreatedPlaylist(playlistName);
+    }
 }

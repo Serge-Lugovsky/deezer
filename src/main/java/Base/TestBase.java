@@ -38,7 +38,7 @@ public class TestBase extends MyActivityAPI {
         sessionId = app.getDriver().manage().getCookieNamed("sid");
     }
 
-    @BeforeMethod()
+    @BeforeMethod(onlyForGroups = {"UIOperation"})
     public void login(){
         if (!app.getDriver().manage().getCookieNamed("sid").getValue().equals(sessionId.getValue())){
             app.getDriver().manage().addCookie(sessionId);
@@ -47,7 +47,7 @@ public class TestBase extends MyActivityAPI {
         }
     }
 
-    @AfterMethod
+    @AfterMethod(onlyForGroups = {"UIOperation"})
     public void logout(){
         app.getDriver().manage().deleteAllCookies();
         app.getDriver().navigate().refresh();

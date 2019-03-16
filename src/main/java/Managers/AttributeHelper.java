@@ -37,4 +37,19 @@ public class AttributeHelper extends PageManager {
         return searchPage.getArtistNameAfterSearch();
     }
 
+    @Step("Get all user playlist names")
+    public List<String> getListOfPlaylistNames(){
+        return myMusicPage.getListPlaylistName();
+    }
+
+    @Step("Get actual playlist total tracks")
+    public List<String> getActualTracksInPlaylist(){
+        return playListPage.getActualListTracksInPlaylist();
+    }
+
+    @Step("Get expected playlist total tracks")
+    public List<String> getExpectedTracksInPlaylist(){
+        return searchPage.getExpectedListTracksAddedToPlaylist();
+    }
+
 }
