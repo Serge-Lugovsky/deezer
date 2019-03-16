@@ -68,6 +68,17 @@ public class SearchPage extends Page {
         playlistMenuItem.click();
     }
 
+    @Step("Add tracks to favorite")
+    public void addSelectedTrackToFavorite(int sumTracks){
+        for (int count = 0; count < sumTracks ; count++){
+            WebElement track = trackList.get(count);
+            WebElement likeButton = track.findElement(By.xpath(".//div[contains(@class, 'cell-love')]/button"));
+            jse.executeScript("arguments[0].scrollIntoView(false);", track);
+            wait.until(ExpectedConditions.elementToBeClickable(likeButton));
+            jse.executeScript("arguments[0].click();", likeButton);
+        }
+    }
+
     @Step("Get search result text")
     public String getSearchResultText(){
         try {

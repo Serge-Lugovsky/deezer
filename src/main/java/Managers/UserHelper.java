@@ -49,6 +49,11 @@ public class UserHelper extends PageManager {
         mainPage.searchTracks(searchData);
     }
 
+    @Step("Add tracks to favorite")
+    public void addTracksToFavoriteTracks(int sumTracks){
+        searchPage.addSelectedTrackToFavorite(sumTracks);
+    }
+
     @Step("Add tracks to playlist")
     public void addTracksToCreatedPlaylist(String playlistName, int elemNmb){
         searchPage.openTracksContextMenuForAddToPlaylist(playlistName, elemNmb);

@@ -14,6 +14,7 @@ public class PlaylistTest extends TestBase {
     private final String playlistName = "My Epic Music";
     private final String playlistDescription = "Playlist Of my Epic music";
     private final String musicForSearch = "Miyagi";
+    private final int sumTracksToAddInFavorite = 5;
     private final int sumTracksToAddInPlaylist = 6;
 
     @Description(value = "Create playlist test")
@@ -50,9 +51,20 @@ public class PlaylistTest extends TestBase {
                 app.getAttributeHelper().getDurationPlaylistExpected());
     }
 
+    @Description(value = "Add track to favorite")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(description = "Add track to favorite", groups = {"playlistOperation", "UIOperation"}, priority = 4)
+    public void addTrackToFaforiteTest(){
+        app.getUserHelper().searchMusic(musicForSearch);
+        Assert.assertEquals(app.getAttributeHelper().getSearchConfirmText(), musicForSearch);
+        app.getUserHelper().addTracksToFavoriteTracks(sumTracksToAddInFavorite);
+        app.getNavigationHelper().goToMyFavoriteTacksPage();
+        Assert.assertEquals(app.getAttributeHelper().getListFavoriteTracksSizeAfterAdd(), sumTracksToAddInFavorite);
+    }
+
     @Description(value = "Delete playlist")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Delete playlist", dependsOnMethods = "createPlaylistTest", priority = 4, alwaysRun = true)
+    @Test(description = "Delete playlist", dependsOnMethods = "createPlaylistTest", priority = 5, alwaysRun = true)
     public void deletePlaylistTest(){
         deletePlaylistById(getPlaylistIdForDelete(playlistName));
         Assert.assertFalse(getAllPlaylists().contains(playlistName));

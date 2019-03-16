@@ -29,5 +29,10 @@ public class NavigationHelper extends PageManager {
     public void goToArtistSearchMenu(){
         searchPage.moveToArtistSearchMenu();
     }
-    
+
+    @Step("Move to favorite tracks page")
+    public void goToMyFavoriteTacksPage(){
+        mainPage.moveToMyFavoriteTracksMenu();
+    }
+
 }

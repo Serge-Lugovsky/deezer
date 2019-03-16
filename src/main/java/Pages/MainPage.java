@@ -23,6 +23,9 @@ public class MainPage extends Page {
     @FindBy(xpath = "(//a/span)[3]")
     private WebElement logoutLink;
 
+    @FindBy(xpath = "(//a[contains(@class, 'sidebar-nav-link')])[5]")
+    private WebElement favoriteTracksLink;
+
     @FindBy(xpath = "(//a[@class='sidebar-nav-link'])[2]")
     private WebElement playlistButton;
 
@@ -71,6 +74,12 @@ public class MainPage extends Page {
         wait.until(ExpectedConditions.elementToBeClickable(playlistButton));
         playlistButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='create-assistant']")));
+    }
+
+    @Step("Move to favorite tracks page")
+    public void moveToMyFavoriteTracksMenu(){
+        wait.until(ExpectedConditions.elementToBeClickable(favoriteTracksLink));
+        favoriteTracksLink.click();
     }
 
 }

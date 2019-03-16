@@ -42,6 +42,11 @@ public class AttributeHelper extends PageManager {
         return myMusicPage.getListPlaylistName();
     }
 
+    @Step("Get get sum of added favorite tracks")
+    public int getListFavoriteTracksSizeAfterAdd(){
+        return myMusicPage.getListFavoriteTracks();
+    }
+
     @Step("Get actual playlist total tracks")
     public List<String> getActualTracksInPlaylist(){
         return playListPage.getActualListTracksInPlaylist();
