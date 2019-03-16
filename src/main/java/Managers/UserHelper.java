@@ -54,6 +54,14 @@ public class UserHelper extends PageManager {
         searchPage.addSelectedTrackToFavorite(sumTracks);
     }
 
+    @Step("Delete favorite tracks")
+    public void deleteTracksFromFavorite(){
+        myMusicPage
+                .selectFavoriteTracks()
+                .deleteFavoriteTracks()
+                .confirmDeleteFavoriteTracks();
+    }
+
     @Step("Add tracks to playlist")
     public void addTracksToCreatedPlaylist(String playlistName, int elemNmb){
         searchPage.openTracksContextMenuForAddToPlaylist(playlistName, elemNmb);

@@ -2,6 +2,7 @@ package Pages;
 
 import Managers.PageManager;
 import io.qameta.allure.Step;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +34,12 @@ public class MyMusicPage extends Page {
 
     @FindBy(xpath = "//div[contains(@class,'song')]")
     private List<WebElement> trackList;
+
+    @FindBy(xpath = "(//input[@class='checkbox-input'])[1]/parent::label")
+    private WebElement checkboxInputForDeleteFavoriteTracks;
+
+    @FindBy(xpath = "//div[@class='header-action-item']/button")
+    private WebElement deleteTracksButton;
 
     @FindBy(xpath = "//div[@class='toolbar-item']/button")
     private WebElement favoriteTracksMainListenButton;
@@ -98,6 +105,28 @@ public class MyMusicPage extends Page {
             favTracksList.add(element.findElement(By.xpath(".//div[contains(@class, 'cell-love')]/button")));
         }
         return favTracksList.size();
+    }
+
+    @Step("Select favorite tracks for delete")
+    public MyMusicPage selectFavoriteTracks(){
+        wait.until(ExpectedConditions.elementToBeClickable(checkboxInputForDeleteFavoriteTracks));
+        checkboxInputForDeleteFavoriteTracks.click();
+        return this;
+    }
+
+    @Step("Delete favorite tracks")
+    public MyMusicPage deleteFavoriteTracks(){
+        wait.until(ExpectedConditions.elementToBeClickable(deleteTracksButton));
+        deleteTracksButton.click();
+        return this;
+    }
+
+    @Step("Confirm delete favorite tracks")
+    public void confirmDeleteFavoriteTracks(){
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        wait.until(ExpectedConditions.elementToBeClickable(favoriteTracksMainListenButton));
+        driver.navigate().refresh();
     }
 
 }

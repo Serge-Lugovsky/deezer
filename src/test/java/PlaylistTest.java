@@ -62,9 +62,19 @@ public class PlaylistTest extends TestBase {
         Assert.assertEquals(app.getAttributeHelper().getListFavoriteTracksSizeAfterAdd(), sumTracksToAddInFavorite);
     }
 
+    @Description(value = "Delete track from favorite")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(description = "Delete track from favorite", dependsOnMethods = "addTrackToFaforiteTest",
+            groups = {"playlistOperation", "UIOperation"}, priority = 5)
+    public void deleteTracksFromFavoriteTest(){
+        app.getNavigationHelper().goToMyFavoriteTacksPage();
+        app.getUserHelper().deleteTracksFromFavorite();
+        Assert.assertNotEquals(app.getAttributeHelper().getListFavoriteTracksSizeAfterAdd(), sumTracksToAddInFavorite);
+    }
+
     @Description(value = "Delete playlist")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Delete playlist", dependsOnMethods = "createPlaylistTest", priority = 5, alwaysRun = true)
+    @Test(description = "Delete playlist", dependsOnMethods = "createPlaylistTest", priority = 6, alwaysRun = true)
     public void deletePlaylistTest(){
         deletePlaylistById(getPlaylistIdForDelete(playlistName));
         Assert.assertFalse(getAllPlaylists().contains(playlistName));
