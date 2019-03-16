@@ -16,7 +16,7 @@ public class NavigationHelper extends PageManager {
     @Step("Go to user information menu")
     public void goToMyInfoMenu(){
         mainPage.openProfileMenu()
-                        .moveToAccountPage();
+                .moveToAccountPage();
         accountPage.moveToMyInformationMenu();
     }
 
@@ -29,5 +29,5 @@ public class NavigationHelper extends PageManager {
     public void goToArtistSearchMenu(){
         searchPage.moveToArtistSearchMenu();
     }
-
+    
 }

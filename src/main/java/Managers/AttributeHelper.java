@@ -52,4 +52,13 @@ public class AttributeHelper extends PageManager {
         return searchPage.getExpectedListTracksAddedToPlaylist();
     }
 
+    @Step("Get expected playlist total duration")
+    public int getDurationPlaylistExpected(){
+        return playListPage.getPlaylistExpectedDuration();
+    }
+
+    @Step("Get actual playlist total duration")
+    public int getDurationPlaylistActual(){
+        return playListPage.getPlaylistActualDuration();
+    }
 }

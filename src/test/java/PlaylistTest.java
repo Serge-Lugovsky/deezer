@@ -31,7 +31,7 @@ public class PlaylistTest extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Add track to playlist test", dependsOnMethods = "createPlaylistTest", priority = 2,
             groups = {"UIOperation"})
-    public void addTrackToPlaylist(){
+    public void addTrackToPlaylistTest(){
         app.getUserHelper().searchMusic(musicForSearch);
         Assert.assertEquals(app.getAttributeHelper().getSearchConfirmText(), musicForSearch);
         app.getUserHelper().addTracksToCreatedPlaylist(playlistName, sumTracksToAddInPlaylist);
@@ -41,10 +41,19 @@ public class PlaylistTest extends TestBase {
                                                                 app.getAttributeHelper().getExpectedTracksInPlaylist());
     }
 
+    @Test(description = "Check playlist duration", dependsOnMethods = "addTrackToPlaylistTest", priority = 3,
+            groups = {"UIOperation"})
+    public void checkPlaylistTotalDurationTest(){
+        app.getNavigationHelper().goToMyMusicPlaylistMenu();
+        app.getUserHelper().openPlaylist(playlistName);
+        Assert.assertEquals(app.getAttributeHelper().getDurationPlaylistActual(),
+                app.getAttributeHelper().getDurationPlaylistExpected());
+    }
+
     @Description(value = "Delete playlist")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Delete playlist", dependsOnMethods = "createPlaylistTest", priority = 3, alwaysRun = true)
-    public void deletePlaylist(){
+    @Test(description = "Delete playlist", dependsOnMethods = "createPlaylistTest", priority = 4, alwaysRun = true)
+    public void deletePlaylistTest(){
         deletePlaylistById(getPlaylistIdForDelete(playlistName));
         Assert.assertFalse(getAllPlaylists().contains(playlistName));
     }
