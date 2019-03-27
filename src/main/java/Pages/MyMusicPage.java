@@ -77,7 +77,7 @@ public class MyMusicPage extends Page {
     public List<String> getListPlaylistName(){
         List<String> listOfNames = new ArrayList<>();
         for (WebElement elem : allUserPlaylistLinks){
-            jse.executeScript("arguments[0].scrollIntoView(false);", elem);
+            jse.executeScript("arguments[0].scrollIntoView(true);", elem);
             listOfNames.add(elem.getText());
         }
         return listOfNames;
@@ -89,26 +89,28 @@ public class MyMusicPage extends Page {
             jse.executeScript("arguments[0].scrollIntoView(true);", element);
             wait.until(ExpectedConditions.elementToBeClickable(element));
             if (element.getText().equalsIgnoreCase(createdPlaylistName)){
-                element.click();
+                jse.executeScript("arguments[0].click();", element);
                 break;
             }
         }
     }
 
     @Step("Get list favorite tracks")
-    public int getListFavoriteTracks(){
-        List<WebElement> favTracksList = new ArrayList<>();
+    public List<String> getActualFavoriteTracksNames(){
+        List<String> favoriteTracksNamesList = new ArrayList<>();
         wait.until(ExpectedConditions.elementToBeClickable(favoriteTracksMainListenButton));
-        for (WebElement element: trackList){
-            jse.executeScript("arguments[0].scrollIntoView(true);", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-            favTracksList.add(element.findElement(By.xpath(".//div[contains(@class, 'cell-love')]/button")));
+        jse.executeScript("$('div.ads-bottom-alone').remove();");
+        for (WebElement track: trackList){
+            jse.executeScript("arguments[0].scrollIntoView(true);", track);
+            wait.until(ExpectedConditions.elementToBeClickable(track));
+            favoriteTracksNamesList.add(track.findElement(By.xpath(".//a[@itemprop='url']/span")).getText());
         }
-        return favTracksList.size();
+        return favoriteTracksNamesList;
     }
 
     @Step("Select favorite tracks for delete")
     public MyMusicPage selectFavoriteTracks(){
+        jse.executeScript("$('div.ads-bottom-alone').remove();");
         wait.until(ExpectedConditions.elementToBeClickable(checkboxInputForDeleteFavoriteTracks));
         checkboxInputForDeleteFavoriteTracks.click();
         return this;
@@ -123,7 +125,7 @@ public class MyMusicPage extends Page {
 
     @Step("Confirm delete favorite tracks")
     public void confirmDeleteFavoriteTracks(){
-        Alert alert = driver.switchTo().alert();
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
         wait.until(ExpectedConditions.elementToBeClickable(favoriteTracksMainListenButton));
         driver.navigate().refresh();

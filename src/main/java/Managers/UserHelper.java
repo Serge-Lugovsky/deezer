@@ -3,6 +3,11 @@ package Managers;
 import Models.User;
 import io.qameta.allure.Step;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static Base.TestBase.getBaseUser;
+
 
 public class UserHelper extends PageManager {
 
@@ -63,7 +68,7 @@ public class UserHelper extends PageManager {
     }
 
     @Step("Add tracks to playlist")
-    public void addTracksToCreatedPlaylist(String playlistName, int elemNmb){
+    public void addTracksToPlaylistAndSaveTracksName(String playlistName, int elemNmb){
         searchPage.openTracksContextMenuForAddToPlaylist(playlistName, elemNmb);
     }
 
@@ -71,4 +76,30 @@ public class UserHelper extends PageManager {
     public void openPlaylist(String playlistName){
         myMusicPage.openCreatedPlaylist(playlistName);
     }
+
+    @Step("Save expected chanel link")
+    public void saveExpectedChannelLink(){
+        channelsPage.saveExpectedChannelLinkFromPage();
+    }
+
+    @Step("Get user personal data")
+    public static List<String> USER_PERSONAL_DATA(){
+        List<String> finalUserInfoList = new ArrayList<>();
+
+        finalUserInfoList.add(getBaseUser().getGender());
+        finalUserInfoList.add(getBaseUser().getUserName());
+        finalUserInfoList.add(getBaseUser().getLastName());
+        finalUserInfoList.add(getBaseUser().getFirstName());
+        finalUserInfoList.add(getBaseUser().getDayOfBirth());
+        finalUserInfoList.add(getBaseUser().getMonthOfBirth());
+        finalUserInfoList.add(getBaseUser().getYearOfBirth());
+        finalUserInfoList.add(getBaseUser().getAddress());
+        finalUserInfoList.add(getBaseUser().getZipCode());
+        finalUserInfoList.add(getBaseUser().getTown());
+        finalUserInfoList.add(getBaseUser().getMobilePhone());
+        finalUserInfoList.add(getBaseUser().getLanguage());
+
+        return finalUserInfoList;
+    }
+
 }

@@ -15,8 +15,8 @@ public class MyActivityAPI {
     private DeezerClient deezerClient = RetrofitService.createService(DeezerClient.class, accessToken);
 
     @Step("Get playlist id for delete")
-    protected String getPlaylistIdForDelete(String playlistName){
-        Response<PlaylistModel> responsePlaylistIs = null;
+    public String getPlaylistIdForDelete(String playlistName){
+        Response<DataPlaylistModel> responsePlaylistIs = null;
         String playlistId = null;
 
         try {
@@ -28,7 +28,7 @@ public class MyActivityAPI {
         if (responsePlaylistIs.isSuccessful()){
              playlistId = responsePlaylistIs.body().getData().stream()
                     .filter(elem-> elem.getTitle().equals(playlistName))
-                    .map(Playlist::getId)
+                    .map(PlaylistModel::getId)
                     .collect(Collectors.toList())
                     .stream().findFirst().get().toString();
         }
@@ -36,7 +36,7 @@ public class MyActivityAPI {
     }
 
     @Step("Delete playlist")
-    protected void deletePlaylistById(String idPlaylist){
+    public void deletePlaylistById(String idPlaylist){
         Response<Boolean> deletePlayListByName = null;
 
         try {
@@ -46,8 +46,8 @@ public class MyActivityAPI {
         }
     }
 
-    protected List<String> getAllPlaylists(){
-        Response<PlaylistModel> getPlaylistList = null;
+    public List<String> getAllPlaylists(){
+        Response<DataPlaylistModel> getPlaylistList = null;
         List<String> listOfNames = null;
 
         try {
@@ -59,7 +59,7 @@ public class MyActivityAPI {
         if (getPlaylistList.isSuccessful()){
             listOfNames = getPlaylistList.body()
                     .getData().stream()
-                    .map(Playlist::getTitle)
+                    .map(PlaylistModel::getTitle)
                     .collect(Collectors.toList());
         }
         return listOfNames;

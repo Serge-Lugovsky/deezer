@@ -6,17 +6,19 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import Listeners.ScreenShotOnFailListener;
 
+import static Base.TestsDescription.USER_INFO_TEST_DESCRIPTION;
+import static Managers.UserHelper.USER_PERSONAL_DATA;
+
 
 @Listeners({ScreenShotOnFailListener.class})
 public class UserInfoTest extends TestBase {
 
-    @Description(value = "Check user personal information")
+    @Description(value = USER_INFO_TEST_DESCRIPTION)
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Check user data", groups = {"UIOperation"})
+    @Test(description = "Check user data", groups = "UIOperation")
     public void userInfoTest(){
         app.getNavigationHelper().goToMyInfoMenu();
-        Assert.assertEquals(app.getAttributeHelper().getActualUserInfoList(),
-                                                    app.getAttributeHelper().getExpectedUserInfoList(getUser()));
+        Assert.assertEquals(app.getAttributeHelper().getActualUserInfoList(), USER_PERSONAL_DATA());
     }
 
 }

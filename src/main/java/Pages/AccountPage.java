@@ -2,13 +2,13 @@ package Pages;
 
 import Managers.PageManager;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.*;
 
-import static Utils.JsAndJqueryWaiter.waitJsAndJQueryLoad;
 
 public class AccountPage extends Page {
 
@@ -31,7 +31,8 @@ public class AccountPage extends Page {
     @Step("Get user data")
     public List<String> getAllUserInputData(){
         List<String> dataList = new ArrayList<>();
-        waitJsAndJQueryLoad(jse, wait);
+        wait.until(ExpectedConditions
+                .presenceOfAllElementsLocatedBy(By.xpath("//input[@class='form-control']|//select|//input[@name='sex']")));
         for (WebElement elm: userDataInputList){
             jse.executeScript("arguments[0].scrollIntoView(true);", elm);
             if (elm.getAttribute("type").equals("radio")){
@@ -39,7 +40,6 @@ public class AccountPage extends Page {
                     dataList.add(elm.getAttribute("value").equals("M") ? "Male" : "Female");
                 }
             }else{
-                wait.until(ExpectedConditions.elementToBeClickable(elm));
                 dataList.add(elm.getAttribute("value"));
             }
         }

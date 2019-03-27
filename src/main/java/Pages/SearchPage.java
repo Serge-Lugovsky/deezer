@@ -29,16 +29,17 @@ public class SearchPage extends Page {
     @FindBy(xpath = "//div[contains(@class,'song')]")
     private List<WebElement> trackList;
 
-    private static List<String> expectedListTracksNames = new ArrayList<>();
+    private static List<String> expectedAddedToPlaylistTracksNamesList = new ArrayList<>();
+    private static List<String> expectedFavoriteTracksNamesList = new ArrayList<>();
 
-    @Step("Get Expected tracks list")
+    @Step("Get expected tracks added to playlist")
     public List<String> getExpectedListTracksAddedToPlaylist(){
-        return expectedListTracksNames;
+        return expectedAddedToPlaylistTracksNamesList;
     }
 
     @Step("Open tracks context menu for add to playlist")
     public void openTracksContextMenuForAddToPlaylist(String playlistName, int elemNmb){
-
+        jse.executeScript("$('div.ads-bottom-alone').remove();");
         for (int count = 0; count < elemNmb ; count++){
             WebElement track = trackList.get(count);
             jse.executeScript("arguments[0].scrollIntoView(true); window.scrollBy(0, -200)", track);
@@ -46,7 +47,7 @@ public class SearchPage extends Page {
                     .xpath(".//button[@class='action-item-btn datagrid-action']"));
             openContextTrackMenu(track, addTrackToPlaylistButton);
             addTrackToPlaylist(playlistName);
-            expectedListTracksNames.add(track.findElement(By.xpath(".//a[@itemprop='url']/span")).getText());
+            saveAddedToPlaylistTrackNameToList(track);
         }
     }
 
@@ -56,7 +57,7 @@ public class SearchPage extends Page {
             actions.moveToElement(track).perform();
             wait.until(ExpectedConditions.elementToBeClickable(addTrackToPlaylistButton));
             addTrackToPlaylistButton.click();
-        }catch (StaleElementReferenceException | TimeoutException e){
+        }catch (StaleElementReferenceException e){
             openContextTrackMenu(track, addTrackToPlaylistButton);
         }
     }
@@ -68,19 +69,37 @@ public class SearchPage extends Page {
         playlistMenuItem.click();
     }
 
+    @Step("Save name of track added to playlist")
+    private void saveAddedToPlaylistTrackNameToList(WebElement track){
+        expectedAddedToPlaylistTracksNamesList.add(track.findElement(By.xpath(".//a[@itemprop='url']/span")).getText());
+    }
+
     @Step("Add tracks to favorite")
     public void addSelectedTrackToFavorite(int sumTracks){
+        jse.executeScript("$('div.ads-bottom-alone').remove();");
         for (int count = 0; count < sumTracks ; count++){
             WebElement track = trackList.get(count);
             WebElement likeButton = track.findElement(By.xpath(".//div[contains(@class, 'cell-love')]/button"));
             jse.executeScript("arguments[0].scrollIntoView(false);", track);
             wait.until(ExpectedConditions.elementToBeClickable(likeButton));
             jse.executeScript("arguments[0].click();", likeButton);
+            saveFavoriteTracksNamesToList(track);
         }
+    }
+
+    @Step("Save favorite tracks names to list")
+    private void saveFavoriteTracksNamesToList(WebElement track){
+        expectedFavoriteTracksNamesList.add(track.findElement(By.xpath(".//a[@itemprop='url']/span")).getText());
+    }
+
+    @Step("Get expected favorite tracks")
+    public List<String> getExpectedFavoriteTracksNames(){
+        return expectedFavoriteTracksNamesList;
     }
 
     @Step("Get search result text")
     public String getSearchResultText(){
+        jse.executeScript("$('div.ads-bottom-alone').remove();");
         try {
             wait.until(ExpectedConditions.visibilityOf(searchResultText));
         }catch (StaleElementReferenceException e){
@@ -97,6 +116,7 @@ public class SearchPage extends Page {
 
     @Step("Get artist name after search")
     public String getArtistNameAfterSearch(){
+        jse.executeScript("$('div.ads-bottom-alone').remove();");
         jse.executeScript("arguments[0].scrollIntoView(false);", artistNameListAfterSearch.get(0));
         wait.until(ExpectedConditions.elementToBeClickable(artistNameListAfterSearch.get(0)));
         return artistNameListAfterSearch.get(0).getText().toLowerCase();

@@ -2,6 +2,7 @@ package Pages;
 
 import Managers.PageManager;
 import io.qameta.allure.Step;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,7 +24,11 @@ public class HomePage extends Page {
 
     @Step("Check logout")
     public boolean verifyLogout(){
-        wait.until(ExpectedConditions.elementToBeClickable(loginLink));
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(loginLink));
+        }catch (StaleElementReferenceException e){
+            verifyLogout();
+        }
         return loginLink.isDisplayed();
     }
 

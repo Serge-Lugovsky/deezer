@@ -4,18 +4,51 @@
 <suite name="Deezer" verbose="1">
     <test name="Check user information test">
         <classes>
-            <class name="UserInfoTest"/>
+            <class name="UserInfoTest">
+                <methods>
+                    <include name="userInfoTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="Check search test">
         <classes>
-            <class name="SearchTest"/>
+            <class name="SearchTest">
+                <methods>
+                    <include name="searchTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="Check playlist test">
         <classes>
-            <class name="PlaylistTest"/>
+            <class name="PlaylistTest">
+                <methods>
+                    <include name="createPlaylistTest"/>
+                    <include name="addTracksToPlaylistTest"/>
+                    <include name="checkPlaylistTotalDurationTest"/>
+                    <include name="deletePlaylistTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
-
+    <test name="Favorite tracks test" >
+        <classes>
+            <class name="FavoriteTracksTest">
+                <methods>
+                    <include name="addTracksToFavoriteTest"/>
+                    <include name="deleteTracksFromFavoriteTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="ChannelTest">
+        <classes>
+            <class name="ChannelTest">
+                <methods>
+                    <include name="checkChannelLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

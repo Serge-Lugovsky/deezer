@@ -15,6 +15,7 @@ public class PageManager {
     MyMusicPage myMusicPage;
     PlayListPage playListPage;
     SearchPage searchPage;
+    ChannelsPage channelsPage;
 
 
     PageManager(WebDriver driver){
@@ -26,6 +27,7 @@ public class PageManager {
         myMusicPage = initElements(new MyMusicPage(this));
         playListPage = initElements(new PlayListPage(this));
         searchPage = initElements(new SearchPage(this));
+        channelsPage = initElements(new ChannelsPage(this));
     }
 
     private <T extends Page> T initElements(T page){

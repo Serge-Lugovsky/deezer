@@ -6,7 +6,7 @@ import retrofit2.http.*;
 public interface DeezerClient {
 
     @GET("user/{userId}/playlists")
-    Call <PlaylistModel> getListPlaylist(
+    Call <DataPlaylistModel> getListPlaylist(
             @Path("userId") String userId
     );
 

@@ -1,5 +1,6 @@
 package Managers;
 
+import DeezerAPI.MyActivityAPI;
 import Drivers.Driver;
 import Utils.PropertyLoader;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ public class AppManager {
     private UserHelper userHelper;
     private NavigationHelper navigationHelper;
     private AttributeHelper attributeHelper;
+    private MyActivityAPI myActivityAPI;
 
     AppManager() {
         String browserName = PropertyLoader.loadProperty("browser.name");
@@ -19,6 +21,7 @@ public class AppManager {
 
         driver = new Driver().setupDriver(browserName, headLess);
         driver.get(baseUrl);
+        myActivityAPI = new MyActivityAPI();
 
         userHelper = new UserHelper(this);
         navigationHelper = new NavigationHelper(this);
@@ -40,4 +43,9 @@ public class AppManager {
     public AttributeHelper getAttributeHelper() {
         return attributeHelper;
     }
+
+    public MyActivityAPI getMyActivityAPI() {
+        return myActivityAPI;
+    }
+
 }

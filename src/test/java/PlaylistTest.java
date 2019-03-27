@@ -7,77 +7,57 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import Listeners.ScreenShotOnFailListener;
 
+import static Base.TestsDescription.*;
+
 
 @Listeners({ScreenShotOnFailListener.class})
 public class PlaylistTest extends TestBase {
 
-    private final String playlistName = "My Epic Music";
-    private final String playlistDescription = "Playlist Of my Epic music";
-    private final String musicForSearch = "Miyagi";
-    private final int sumTracksToAddInFavorite = 5;
-    private final int sumTracksToAddInPlaylist = 6;
+    private final String PLAYLIST_NAME = "My Epic Music";
+    private final String PLAYLIST_DESC = "PlaylistModel Of my Epic music";
+    private final String MUSIC_FOR_SEARCH = "Miyagi";
+    private final int SUM_TRACKS_TO_ADD_IN_PLAYLIST = 7;
 
-    @Description(value = "Create playlist test")
+    @Description(value = CREATE_PLAYLIST_TEST_DESCRIPTION)
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Create playlist test", groups = {"playlistOperation", "UIOperation"}, priority = 1)
+    @Test(description = "Create playlist", groups = "UIOperation")
     public void createPlaylistTest(){
         app.getNavigationHelper().goToMyMusicPlaylistMenu();
-        app.getUserHelper().createPlaylist(playlistName, playlistDescription);
-        Assert.assertEquals(app.getAttributeHelper().getNameOfCreatedPlaylist(), playlistName);
+        app.getUserHelper().createPlaylist(PLAYLIST_NAME, PLAYLIST_DESC);
+        Assert.assertEquals(app.getAttributeHelper().getNameOfCreatedPlaylist(), PLAYLIST_NAME);
         app.getNavigationHelper().goToMyMusicPlaylistMenu();
-        Assert.assertTrue(app.getAttributeHelper().getListOfPlaylistNames().contains(playlistName));
+        Assert.assertTrue(app.getAttributeHelper().getListOfPlaylistNames().contains(PLAYLIST_NAME));
     }
 
-    @Description(value = "Add tracks to playlist test")
+    @Description(value = ADD_TRACKS_TO_PLAYLIST_TEST_DESCRIPTION)
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Add track to playlist test", dependsOnMethods = "createPlaylistTest", priority = 2,
-            groups = {"UIOperation"})
-    public void addTrackToPlaylistTest(){
-        app.getUserHelper().searchMusic(musicForSearch);
-        Assert.assertEquals(app.getAttributeHelper().getSearchConfirmText(), musicForSearch);
-        app.getUserHelper().addTracksToCreatedPlaylist(playlistName, sumTracksToAddInPlaylist);
+    @Test(description = "Add tracks to playlist", dependsOnMethods = "createPlaylistTest", groups = "UIOperation")
+    public void addTracksToPlaylistTest(){
+        app.getUserHelper().searchMusic(MUSIC_FOR_SEARCH);
+        Assert.assertEquals(app.getAttributeHelper().getSearchConfirmText(), MUSIC_FOR_SEARCH);
+        app.getUserHelper().addTracksToPlaylistAndSaveTracksName(PLAYLIST_NAME, SUM_TRACKS_TO_ADD_IN_PLAYLIST);
         app.getNavigationHelper().goToMyMusicPlaylistMenu();
-        app.getUserHelper().openPlaylist(playlistName);
+        app.getUserHelper().openPlaylist(PLAYLIST_NAME);
         Assert.assertEquals(app.getAttributeHelper().getActualTracksInPlaylist(),
                                                                 app.getAttributeHelper().getExpectedTracksInPlaylist());
     }
 
-    @Test(description = "Check playlist duration", dependsOnMethods = "addTrackToPlaylistTest", priority = 3,
-            groups = {"UIOperation"})
+    @Description(value = CHECK_PLAYLIST_TOTAL_DURATION_TEST_DESCRIPTION)
+    @Severity(SeverityLevel.NORMAL)
+    @Test(description = "Check playlist duration", dependsOnMethods = "addTracksToPlaylistTest", groups = "UIOperation")
     public void checkPlaylistTotalDurationTest(){
         app.getNavigationHelper().goToMyMusicPlaylistMenu();
-        app.getUserHelper().openPlaylist(playlistName);
+        app.getUserHelper().openPlaylist(PLAYLIST_NAME);
         Assert.assertEquals(app.getAttributeHelper().getDurationPlaylistActual(),
                 app.getAttributeHelper().getDurationPlaylistExpected());
     }
 
-    @Description(value = "Add track to favorite")
+    @Description(value = DELETE_PLAYLIST_TEST_DESCRIPTION)
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Add track to favorite", groups = {"playlistOperation", "UIOperation"}, priority = 4)
-    public void addTrackToFaforiteTest(){
-        app.getUserHelper().searchMusic(musicForSearch);
-        Assert.assertEquals(app.getAttributeHelper().getSearchConfirmText(), musicForSearch);
-        app.getUserHelper().addTracksToFavoriteTracks(sumTracksToAddInFavorite);
-        app.getNavigationHelper().goToMyFavoriteTacksPage();
-        Assert.assertEquals(app.getAttributeHelper().getListFavoriteTracksSizeAfterAdd(), sumTracksToAddInFavorite);
-    }
-
-    @Description(value = "Delete track from favorite")
-    @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Delete track from favorite", dependsOnMethods = "addTrackToFaforiteTest",
-            groups = {"playlistOperation", "UIOperation"}, priority = 5)
-    public void deleteTracksFromFavoriteTest(){
-        app.getNavigationHelper().goToMyFavoriteTacksPage();
-        app.getUserHelper().deleteTracksFromFavorite();
-        Assert.assertNotEquals(app.getAttributeHelper().getListFavoriteTracksSizeAfterAdd(), sumTracksToAddInFavorite);
-    }
-
-    @Description(value = "Delete playlist")
-    @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Delete playlist", dependsOnMethods = "createPlaylistTest", priority = 6, alwaysRun = true)
+    @Test(description = "Delete playlist", dependsOnMethods = "createPlaylistTest", priority = 999)
     public void deletePlaylistTest(){
-        deletePlaylistById(getPlaylistIdForDelete(playlistName));
-        Assert.assertFalse(getAllPlaylists().contains(playlistName));
+        app.getMyActivityAPI().deletePlaylistById(app.getMyActivityAPI().getPlaylistIdForDelete(PLAYLIST_NAME));
+        Assert.assertFalse(app.getMyActivityAPI().getAllPlaylists().contains(PLAYLIST_NAME));
     }
 
 }

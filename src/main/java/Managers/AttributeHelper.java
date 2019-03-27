@@ -1,8 +1,8 @@
 package Managers;
 
-import Models.User;
 import io.qameta.allure.Step;
 
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -15,11 +15,6 @@ public class AttributeHelper extends PageManager {
     @Step("Get actual user personal information list")
     public List<String> getActualUserInfoList(){
         return accountPage.getAllUserInputData();
-    }
-
-    @Step("Get expected user personal information list")
-    public List<String> getExpectedUserInfoList(User user){
-        return user.getUserInfoList();
     }
 
     @Step("Get name of created playlist")
@@ -42,9 +37,14 @@ public class AttributeHelper extends PageManager {
         return myMusicPage.getListPlaylistName();
     }
 
-    @Step("Get get sum of added favorite tracks")
-    public int getListFavoriteTracksSizeAfterAdd(){
-        return myMusicPage.getListFavoriteTracks();
+    @Step("Get actual favorite tracks names")
+    public List<String> getActualListFavoriteTracksNames(){
+        return myMusicPage.getActualFavoriteTracksNames();
+    }
+
+    @Step("Get expected favorite tracks names")
+    public List<String> getExpectedListFavoriteTracksNames(){
+        return searchPage.getExpectedFavoriteTracksNames();
     }
 
     @Step("Get actual playlist total tracks")
@@ -58,12 +58,22 @@ public class AttributeHelper extends PageManager {
     }
 
     @Step("Get expected playlist total duration")
-    public int getDurationPlaylistExpected(){
+    public LocalTime getDurationPlaylistExpected(){
         return playListPage.getPlaylistExpectedDuration();
     }
 
     @Step("Get actual playlist total duration")
-    public int getDurationPlaylistActual(){
+    public LocalTime getDurationPlaylistActual(){
         return playListPage.getPlaylistActualDuration();
+    }
+
+    @Step("Get actual channel link")
+    public String getActualChannelLink(){
+        return channelsPage.getActualChannelLink();
+    }
+
+    @Step("Get expected channel link")
+    public String getExpectedChannelLink(){
+        return channelsPage.getExpectedChannelLink();
     }
 }

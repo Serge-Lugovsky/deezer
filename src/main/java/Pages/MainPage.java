@@ -26,7 +26,7 @@ public class MainPage extends Page {
     @FindBy(xpath = "(//a[contains(@class, 'sidebar-nav-link')])[5]")
     private WebElement favoriteTracksLink;
 
-    @FindBy(xpath = "(//a[@class='sidebar-nav-link'])[2]")
+    @FindBy(xpath = "(//a[contains(@class,'sidebar-nav-link')])[6]")
     private WebElement playlistButton;
 
     @FindBy(xpath = "//input[@type='search']")
@@ -34,6 +34,15 @@ public class MainPage extends Page {
 
     @FindBy(xpath = "//button[@class='topbar-search-submit']")
     private WebElement searchButton;
+
+    @FindBy(xpath = "(//a[contains(@class,'sidebar-nav-link')])[2]")
+    private WebElement channelsPageLink;
+
+    @Step("Move to Channels page")
+    public void moveToChannelsPage(){
+        wait.until(ExpectedConditions.elementToBeClickable(channelsPageLink));
+        channelsPageLink.click();
+    }
 
     @Step("Search tracks")
     public void searchTracks(String searchData){

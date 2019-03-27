@@ -20,7 +20,7 @@ public class NavigationHelper extends PageManager {
         accountPage.moveToMyInformationMenu();
     }
 
-    @Step("Go to all playlists")
+    @Step("Go to all playlist")
     public void goToMyMusicPlaylistMenu(){
         mainPage.moveToPlaylistMenu();
     }
@@ -33,6 +33,16 @@ public class NavigationHelper extends PageManager {
     @Step("Move to favorite tracks page")
     public void goToMyFavoriteTacksPage(){
         mainPage.moveToMyFavoriteTracksMenu();
+    }
+
+    @Step("Go to channels page")
+    public void goToChannelsPage(){
+        mainPage.moveToChannelsPage();
+    }
+
+    @Step("Go to chanel page")
+    public void goToChanelPage(){
+        channelsPage.openChanelPage();
     }
 
 }
