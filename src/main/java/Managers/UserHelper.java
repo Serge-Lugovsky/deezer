@@ -49,9 +49,9 @@ public class UserHelper extends PageManager {
                 .logout();
     }
 
-    @Step("Search tracks")
+    @Step("Search music")
     public void searchMusic(String searchData){
-        mainPage.searchTracks(searchData);
+        mainPage.searchAnyMusic(searchData);
     }
 
     @Step("Add tracks to favorite")
@@ -67,9 +67,9 @@ public class UserHelper extends PageManager {
                 .confirmDeleteFavoriteTracks();
     }
 
-    @Step("Add tracks to playlist")
+    @Step("Add tracks to playlist and save added tracks names")
     public void addTracksToPlaylistAndSaveTracksName(String playlistName, int elemNmb){
-        searchPage.openTracksContextMenuForAddToPlaylist(playlistName, elemNmb);
+        searchPage.addTracksToPlaylistAndSaveTracksNames(playlistName, elemNmb);
     }
 
     @Step("Open playlist")

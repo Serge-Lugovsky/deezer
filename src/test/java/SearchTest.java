@@ -9,7 +9,7 @@ import Listeners.ScreenShotOnFailListener;
 
 import static Base.TestsDescription.SEARCH_TEST_DESCRIPTION;
 
-@Listeners({ScreenShotOnFailListener.class})
+@Listeners(ScreenShotOnFailListener.class)
 public class SearchTest extends TestBase {
 
     private final String SEARCH_ARTIST = "eminem";

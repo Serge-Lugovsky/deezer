@@ -37,8 +37,8 @@ public class SearchPage extends Page {
         return expectedAddedToPlaylistTracksNamesList;
     }
 
-    @Step("Open tracks context menu for add to playlist")
-    public void openTracksContextMenuForAddToPlaylist(String playlistName, int elemNmb){
+    @Step("Add tracks to playlist and save added tracks names")
+    public void addTracksToPlaylistAndSaveTracksNames(String playlistName, int elemNmb){
         jse.executeScript("$('div.ads-bottom-alone').remove();");
         for (int count = 0; count < elemNmb ; count++){
             WebElement track = trackList.get(count);
@@ -54,7 +54,7 @@ public class SearchPage extends Page {
     @Step("Hover on track and click add to track button")
     private void openContextTrackMenu(WebElement track, WebElement addTrackToPlaylistButton){
         try {
-            actions.moveToElement(track).perform();
+            actions.clickAndHold(track).moveToElement(track).perform();
             wait.until(ExpectedConditions.elementToBeClickable(addTrackToPlaylistButton));
             addTrackToPlaylistButton.click();
         }catch (StaleElementReferenceException e){
@@ -80,7 +80,7 @@ public class SearchPage extends Page {
         for (int count = 0; count < sumTracks ; count++){
             WebElement track = trackList.get(count);
             WebElement likeButton = track.findElement(By.xpath(".//div[contains(@class, 'cell-love')]/button"));
-            jse.executeScript("arguments[0].scrollIntoView(false);", track);
+            jse.executeScript("arguments[0].scrollIntoView(true); window.scrollBy(0, -200)", track);
             wait.until(ExpectedConditions.elementToBeClickable(likeButton));
             jse.executeScript("arguments[0].click();", likeButton);
             saveFavoriteTracksNamesToList(track);
@@ -97,7 +97,7 @@ public class SearchPage extends Page {
         return expectedFavoriteTracksNamesList;
     }
 
-    @Step("Get search result text")
+    @Step("Get confirm search result text")
     public String getSearchResultText(){
         jse.executeScript("$('div.ads-bottom-alone').remove();");
         try {

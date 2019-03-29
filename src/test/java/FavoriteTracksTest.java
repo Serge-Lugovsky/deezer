@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import static Base.TestsDescription.ADD_TRACKS_TO_FAVORITE_TEST_DESCRIPTION;
 import static Base.TestsDescription.DELETE_TRACKS_FROM_FAVORITE_TEST_DESCRIPTION;
 
-@Listeners({ScreenShotOnFailListener.class})
+@Listeners(ScreenShotOnFailListener.class)
 public class FavoriteTracksTest extends TestBase {
 
     private final int SUM_TRACKS_TO_ADD_IN_FAVORITE = 5;

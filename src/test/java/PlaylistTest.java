@@ -10,7 +10,7 @@ import Listeners.ScreenShotOnFailListener;
 import static Base.TestsDescription.*;
 
 
-@Listeners({ScreenShotOnFailListener.class})
+@Listeners(ScreenShotOnFailListener.class)
 public class PlaylistTest extends TestBase {
 
     private final String PLAYLIST_NAME = "My Epic Music";
@@ -51,6 +51,19 @@ public class PlaylistTest extends TestBase {
         Assert.assertEquals(app.getAttributeHelper().getDurationPlaylistActual(),
                 app.getAttributeHelper().getDurationPlaylistExpected());
     }
+
+    @Description(value = CHECK_TRACK_NAME_IN_CONTEXT_MENU_TEST_DESCRIPTION)
+    @Severity(SeverityLevel.NORMAL)
+    @Test(description = "Check track name in context menu", dependsOnMethods = "addTracksToPlaylistTest",
+            groups = "UIOperation")
+    public void checkTrackNameInContextMenuTest(){
+        app.getNavigationHelper().goToMyMusicPlaylistMenu();
+        app.getUserHelper().openPlaylist(PLAYLIST_NAME);
+        app.getAttributeHelper().saveExpectedTrackName();
+        Assert.assertEquals(app.getAttributeHelper().getActualTrackNameFromContextMenu(),
+                app.getAttributeHelper().getExpectedTrackNameFromPage());
+    }
+
 
     @Description(value = DELETE_PLAYLIST_TEST_DESCRIPTION)
     @Severity(SeverityLevel.NORMAL)

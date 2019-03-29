@@ -27,6 +27,7 @@
                     <include name="createPlaylistTest"/>
                     <include name="addTracksToPlaylistTest"/>
                     <include name="checkPlaylistTotalDurationTest"/>
+                    <include name="checkTrackNameInContextMenuTest"/>
                     <include name="deletePlaylistTest"/>
                 </methods>
             </class>

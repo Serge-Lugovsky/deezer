@@ -9,7 +9,7 @@ import Listeners.ScreenShotOnFailListener;
 
 import static Base.TestsDescription.CHECK_CHANNEL_LINK_TEST_DESCRIPTION;
 
-@Listeners({ScreenShotOnFailListener.class})
+@Listeners(ScreenShotOnFailListener.class)
 public class ChannelTest extends TestBase {
 
     @Description(value = CHECK_CHANNEL_LINK_TEST_DESCRIPTION)

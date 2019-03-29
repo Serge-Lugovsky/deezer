@@ -127,7 +127,7 @@ public class MyMusicPage extends Page {
     public void confirmDeleteFavoriteTracks(){
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
-        wait.until(ExpectedConditions.elementToBeClickable(favoriteTracksMainListenButton));
+        wait.until(ExpectedConditions.not(ExpectedConditions.alertIsPresent()));
         driver.navigate().refresh();
     }
 

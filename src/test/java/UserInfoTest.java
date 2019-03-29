@@ -10,7 +10,7 @@ import static Base.TestsDescription.USER_INFO_TEST_DESCRIPTION;
 import static Managers.UserHelper.USER_PERSONAL_DATA;
 
 
-@Listeners({ScreenShotOnFailListener.class})
+@Listeners(ScreenShotOnFailListener.class)
 public class UserInfoTest extends TestBase {
 
     @Description(value = USER_INFO_TEST_DESCRIPTION)

@@ -44,8 +44,8 @@ public class MainPage extends Page {
         channelsPageLink.click();
     }
 
-    @Step("Search tracks")
-    public void searchTracks(String searchData){
+    @Step("Search music")
+    public void searchAnyMusic(String searchData){
         wait.until(ExpectedConditions.elementToBeClickable(searchField));
         searchField.clear();
         searchField.sendKeys(searchData);

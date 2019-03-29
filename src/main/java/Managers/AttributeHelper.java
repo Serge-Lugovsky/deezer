@@ -22,7 +22,7 @@ public class AttributeHelper extends PageManager {
         return playListPage.getPlaylistName();
     }
 
-    @Step("Get search result text")
+    @Step("Get search confirm result text")
     public String getSearchConfirmText(){
         return searchPage.getSearchResultText();
     }
@@ -76,4 +76,23 @@ public class AttributeHelper extends PageManager {
     public String getExpectedChannelLink(){
         return channelsPage.getExpectedChannelLink();
     }
+
+    @Step("Get actual track name from context menu")
+    public String getActualTrackNameFromContextMenu(){
+        return playListPage
+                .openTrackContextMenu()
+                .getActualNameTrackFromContextMenu();
+    }
+
+    @Step("Get expected track name in context menu")
+    public String getExpectedTrackNameFromPage(){
+        return playListPage
+                .getExpectedNameTrackFromPage();
+    }
+
+    @Step("Save expected track name from page")
+    public void saveExpectedTrackName(){
+        playListPage.saveExpectedNameTrack();
+    }
+
 }

@@ -32,8 +32,11 @@ public class PlayListPage extends Page {
     @FindBy(xpath = "//li[@class='header-info-item'][2]")
     private WebElement playlistTotalTime;
 
-    private static LocalTime playlistDuration = LocalTime.of(0, 0, 0);
+    @FindBy(xpath = "//div[contains(@class,'cell-info')]/h2/a")
+    private WebElement trackNameInContextMenu;
 
+    private static LocalTime playlistDuration = LocalTime.of(0, 0, 0);
+    private static String trackNameFromPage;
 
     @Step("Get playlist total time")
     public LocalTime getPlaylistExpectedDuration() {
@@ -111,6 +114,38 @@ public class PlayListPage extends Page {
     public String getPlaylistName(){
         wait.until(ExpectedConditions.visibilityOf(playListName));
         return playListName.getText();
+    }
+
+    @Step("Open track context menu")
+    public PlayListPage openTrackContextMenu(){
+        jse.executeScript("$('div.ads-bottom-alone').remove();");
+        WebElement track = trackList.get(0);
+        WebElement trackContextMenuButton = track.findElement(By.xpath(".//button[@aria-label='View menu']"));
+
+        jse.executeScript("arguments[0].scrollIntoView(true); window.scrollBy(0, -200)", track);
+        actions.clickAndHold(track).moveToElement(track).perform();
+        wait.until(ExpectedConditions.elementToBeClickable(trackContextMenuButton));
+        trackContextMenuButton.click();
+        return this;
+    }
+
+    @Step("Get actual track name from context menu")
+    public String getActualNameTrackFromContextMenu(){
+        wait.until(ExpectedConditions.elementToBeClickable(trackNameInContextMenu));
+        return trackNameInContextMenu.getText();
+    }
+
+    @Step("Get expected track name from page")
+    public String getExpectedNameTrackFromPage(){
+        return trackNameFromPage;
+    }
+
+    @Step("Save expected track name from page")
+    public void saveExpectedNameTrack(){
+        wait.until(ExpectedConditions.elementToBeClickable(mainPlaylistPlayButton));
+        WebElement track = trackList.get(0);
+        jse.executeScript("arguments[0].scrollIntoView(true); window.scrollBy(0, -200)", track);
+        trackNameFromPage = track.findElement(By.xpath(".//a[@itemprop='url']/span")).getText();
     }
 
 }
