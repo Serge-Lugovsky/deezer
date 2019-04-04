@@ -14,7 +14,7 @@ class RetrofitService {
     private static RetrofitService retrofitInstance;
     private Retrofit retrofit;
 
-    private RetrofitService(){
+    private RetrofitService() {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
@@ -23,8 +23,8 @@ class RetrofitService {
                 .build();
     }
 
-    private static RetrofitService getInstance(){
-        if (retrofitInstance == null){
+    private static RetrofitService getInstance() {
+        if (retrofitInstance == null) {
             retrofitInstance = new RetrofitService();
         }
         return retrofitInstance;

@@ -18,62 +18,77 @@ public class User {
     private String userEmail;
     private String userPassword;
 
-    public User() {}
+    public User() {
+    }
 
-    public void setUserName(String userName) {
+    public User setUserName(String userName) {
         this.userName = userName;
+        return this;
     }
 
-    public void setLastName(String lastName) {
+    public User setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
-    public void setFirstName(String firstName) {
+    public User setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
-    public void setAddress(String address) {
+    public User setAddress(String address) {
         this.address = address;
+        return this;
     }
 
-    public void setDayOfBirth(String dayOfBirth) {
+    public User setDayOfBirth(String dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
+        return this;
     }
 
-    public void setMonthOfBirth(String monthOfBirth) {
+    public User setMonthOfBirth(String monthOfBirth) {
         this.monthOfBirth = monthOfBirth;
+        return this;
     }
 
-    public void setYearOfBirth(String yearOfBirth) {
+    public User setYearOfBirth(String yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
+        return this;
     }
 
-    public void setZipCode(String zipCode) {
+    public User setZipCode(String zipCode) {
         this.zipCode = zipCode;
+        return this;
     }
 
-    public void setTown(String town) {
+    public User setTown(String town) {
         this.town = town;
+        return this;
     }
 
-    public void setMobilePhone(String mobilePhone) {
+    public User setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
+        return this;
     }
 
-    public void setLanguage(String language) {
+    public User setLanguage(String language) {
         this.language = language;
+        return this;
     }
 
-    public void setGender(String gender) {
+    public User setGender(String gender) {
         this.gender = gender;
+        return this;
     }
 
-    public void setUserEmail(String userEmail) {
+    public User setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+        return this;
     }
 
-    public void setUserPassword(String userPassword) {
+    public User setUserPassword(String userPassword) {
         this.userPassword = userPassword;
+        return this;
     }
 
     public String getUserName() {

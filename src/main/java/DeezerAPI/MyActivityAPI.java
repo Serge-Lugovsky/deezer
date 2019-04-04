@@ -14,9 +14,9 @@ public class MyActivityAPI {
     private final String accessToken = PropertyLoader.loadProperty("ACCESS_TOKEN");
     private DeezerClient deezerClient = RetrofitService.createService(DeezerClient.class, accessToken);
 
-    @Step("Get playlist id for delete")
-    public String getPlaylistIdForDelete(String playlistName){
-        Response<DataPlaylistModel> responsePlaylistIs = null;
+    @Step("Get playlist ID by name")
+    public String getPlaylistIDByName(String playlistName) {
+        Response<WrapperPlaylist> responsePlaylistIs = null;
         String playlistId = null;
 
         try {
@@ -25,18 +25,17 @@ public class MyActivityAPI {
             e.printStackTrace();
         }
 
-        if (responsePlaylistIs.isSuccessful()){
-             playlistId = responsePlaylistIs.body().getData().stream()
-                    .filter(elem-> elem.getTitle().equals(playlistName))
-                    .map(PlaylistModel::getId)
-                    .collect(Collectors.toList())
-                    .stream().findFirst().get().toString();
+        if (responsePlaylistIs.isSuccessful()) {
+            playlistId = responsePlaylistIs.body().getData().stream()
+                    .filter(elem -> elem.getTitle().equals(playlistName))
+                    .map(Playlist::getId)
+                    .findFirst().get().toString();
         }
         return playlistId;
     }
 
-    @Step("Delete playlist")
-    public void deletePlaylistById(String idPlaylist){
+    @Step("Delete playlist by ID")
+    public void deletePlaylistById(String idPlaylist) {
         Response<Boolean> deletePlayListByName = null;
 
         try {
@@ -44,10 +43,16 @@ public class MyActivityAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public List<String> getAllPlaylists(){
-        Response<DataPlaylistModel> getPlaylistList = null;
+    @Step("Get all playlists names")
+    public List<String> getAllPlaylist() {
+        Response<WrapperPlaylist> getPlaylistList = null;
         List<String> listOfNames = null;
 
         try {
@@ -56,10 +61,10 @@ public class MyActivityAPI {
             e.printStackTrace();
         }
 
-        if (getPlaylistList.isSuccessful()){
+        if (getPlaylistList.isSuccessful()) {
             listOfNames = getPlaylistList.body()
                     .getData().stream()
-                    .map(PlaylistModel::getTitle)
+                    .map(Playlist::getTitle)
                     .collect(Collectors.toList());
         }
         return listOfNames;

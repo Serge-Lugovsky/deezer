@@ -26,7 +26,7 @@ public class AuthenticationInterceptor implements Interceptor {
                 .build();
 
         Request.Builder builder = original.newBuilder()
-              .url(url);
+                .url(url);
 
         Request request = builder.build();
         return chain.proceed(request);

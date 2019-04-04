@@ -28,7 +28,7 @@ public class AppManager {
         attributeHelper = new AttributeHelper(this);
     }
 
-    public WebDriver getDriver(){
+    public WebDriver getDriver() {
         return driver;
     }
 

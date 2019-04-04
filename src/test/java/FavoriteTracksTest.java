@@ -16,25 +16,26 @@ public class FavoriteTracksTest extends TestBase {
     private final int SUM_TRACKS_TO_ADD_IN_FAVORITE = 5;
     private final String MUSIC_FOR_SEARCH = "Miyagi";
 
-    @Description(value = ADD_TRACKS_TO_FAVORITE_TEST_DESCRIPTION)
+    @Description(ADD_TRACKS_TO_FAVORITE_TEST_DESCRIPTION)
     @Severity(SeverityLevel.NORMAL)
     @Test(description = "Add tracks to favorite", groups = "UIOperation")
-    public void addTracksToFavoriteTest(){
+    public void addTracksToFavoriteTest() {
         app.getUserHelper().searchMusic(MUSIC_FOR_SEARCH);
         Assert.assertEquals(app.getAttributeHelper().getSearchConfirmText(), MUSIC_FOR_SEARCH);
-        app.getUserHelper().addTracksToFavoriteTracks(SUM_TRACKS_TO_ADD_IN_FAVORITE);
-        app.getNavigationHelper().goToMyFavoriteTacksPage();
-        Assert.assertEquals(app.getAttributeHelper().getActualListFavoriteTracksNames(),
-                                                        app.getAttributeHelper().getExpectedListFavoriteTracksNames());
+        app.getUserHelper().addTracksToFavorite(SUM_TRACKS_TO_ADD_IN_FAVORITE);
+        app.getNavigationHelper().goToMyFavoriteTacksMenu();
+        Assert.assertEquals(app.getAttributeHelper().getActualFavoriteTracksNames(),
+                app.getAttributeHelper().getExpectedFavoriteTracksNames());
     }
 
-    @Description(value = DELETE_TRACKS_FROM_FAVORITE_TEST_DESCRIPTION)
+    @Description(DELETE_TRACKS_FROM_FAVORITE_TEST_DESCRIPTION)
     @Severity(SeverityLevel.NORMAL)
     @Test(description = "Delete tracks from favorite", dependsOnMethods = "addTracksToFavoriteTest", groups = "UIOperation")
-    public void deleteTracksFromFavoriteTest(){
-        app.getNavigationHelper().goToMyFavoriteTacksPage();
+    public void deleteTracksFromFavoriteTest() {
+        app.getNavigationHelper().goToMyFavoriteTacksMenu();
         app.getUserHelper().deleteTracksFromFavorite();
-        Assert.assertNotEquals(app.getAttributeHelper().getActualListFavoriteTracksNames(),
-                                                        app.getAttributeHelper().getExpectedListFavoriteTracksNames());
+        Assert.assertNotEquals(app.getAttributeHelper().getActualFavoriteTracksNames(),
+                app.getAttributeHelper().getExpectedFavoriteTracksNames());
     }
+
 }

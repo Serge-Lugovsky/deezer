@@ -15,9 +15,9 @@ import java.util.Map;
 
 public class Driver {
 
-    public WebDriver setupDriver(String browserName, String headless){
+    public WebDriver setupDriver(String browserName, String headless) {
 
-        switch (browserName){
+        switch (browserName) {
             case "chrome":
                 File chromeDriver = new File("./src/main/resources/chromedriver");
                 ChromeDriverService serviceChrome = new ChromeDriverService.Builder()
@@ -28,8 +28,8 @@ public class Driver {
 
                 optionsChrome.addArguments("start-maximized", "disable-infobars");
 
-                if (headless.equals("--headless")){
-                    optionsChrome.addArguments("--headless","--disable-gpu", "--window-size=1366,768","--ignore-certificate-errors");
+                if (headless.equals("--headless")) {
+                    optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1366,768", "--ignore-certificate-errors");
                 }
 
                 Map<String, Object> prefs = new HashMap<>();
@@ -45,8 +45,8 @@ public class Driver {
                         .build();
                 FirefoxOptions optionsFirefox = new FirefoxOptions();
 
-                if (headless.equals("--headless")){
-                    optionsFirefox.addArguments("--headless","--disable-gpu", "--window-size=1366,768","--ignore-certificate-errors");
+                if (headless.equals("--headless")) {
+                    optionsFirefox.addArguments("--headless", "--disable-gpu", "--window-size=1366,768", "--ignore-certificate-errors");
                 }
 
                 return new FirefoxDriver(serviceFirefox, optionsFirefox);

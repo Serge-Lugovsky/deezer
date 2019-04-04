@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MyMusicPage extends Page {
 
-    public MyMusicPage(PageManager pages){
+    public MyMusicPage(PageManager pages) {
         super(pages);
     }
 
@@ -35,8 +35,8 @@ public class MyMusicPage extends Page {
     @FindBy(xpath = "//div[contains(@class,'song')]")
     private List<WebElement> trackList;
 
-    @FindBy(xpath = "(//input[@class='checkbox-input'])[1]/parent::label")
-    private WebElement checkboxInputForDeleteFavoriteTracks;
+    @FindBy(xpath = "(//label[contains(@class,'checkbox')])[1]")
+    private WebElement checkboxFieldForDeleteAllFavoriteTracks;
 
     @FindBy(xpath = "//div[@class='header-action-item']/button")
     private WebElement deleteTracksButton;
@@ -45,14 +45,14 @@ public class MyMusicPage extends Page {
     private WebElement favoriteTracksMainListenButton;
 
     @Step("Open create playlist popup")
-    public MyMusicPage openCreatePlaylistPopup(){
+    public MyMusicPage openCreatePlaylistPopup() {
         wait.until(ExpectedConditions.elementToBeClickable(createPlaylistButton));
         createPlaylistButton.click();
         return this;
     }
 
     @Step("Entry playlist name")
-    public MyMusicPage inputPlaylistName(String name){
+    public MyMusicPage inputPlaylistName(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(playlistNameField));
         playlistNameField.clear();
         playlistNameField.sendKeys(name);
@@ -60,7 +60,7 @@ public class MyMusicPage extends Page {
     }
 
     @Step("Entry playlist description")
-    public MyMusicPage inputPlaylistDescriptions(String desc){
+    public MyMusicPage inputPlaylistDescriptions(String desc) {
         wait.until(ExpectedConditions.elementToBeClickable(listDescriptionsField));
         listDescriptionsField.clear();
         listDescriptionsField.sendKeys(desc);
@@ -68,39 +68,39 @@ public class MyMusicPage extends Page {
     }
 
     @Step("Click create playlist button")
-    public void clickCreatePlaylist(){
+    public void clickCreatePlaylistButton() {
         wait.until(ExpectedConditions.elementToBeClickable(createButtonOnPopup));
         createButtonOnPopup.click();
     }
 
-    @Step("Get all playlist names")
-    public List<String> getListPlaylistName(){
+    @Step("Get all playlists names")
+    public List<String> getAllPlaylistsNames() {
         List<String> listOfNames = new ArrayList<>();
-        for (WebElement elem : allUserPlaylistLinks){
+        for (WebElement elem : allUserPlaylistLinks) {
             jse.executeScript("arguments[0].scrollIntoView(true);", elem);
             listOfNames.add(elem.getText());
         }
         return listOfNames;
     }
 
-    @Step("Open playlist after added tracks")
-    public void openCreatedPlaylist(String createdPlaylistName){
-        for (WebElement element: allUserPlaylistLinks){
+    @Step("Open created playlist")
+    public void openCreatedPlaylist(String createdPlaylistName) {
+        for (WebElement element : allUserPlaylistLinks) {
             jse.executeScript("arguments[0].scrollIntoView(true);", element);
             wait.until(ExpectedConditions.elementToBeClickable(element));
-            if (element.getText().equalsIgnoreCase(createdPlaylistName)){
+            if (element.getText().equalsIgnoreCase(createdPlaylistName)) {
                 jse.executeScript("arguments[0].click();", element);
                 break;
             }
         }
     }
 
-    @Step("Get list favorite tracks")
-    public List<String> getActualFavoriteTracksNames(){
+    @Step("Get actual favorite tracks names")
+    public List<String> getActualFavoriteTracksNames() {
         List<String> favoriteTracksNamesList = new ArrayList<>();
         wait.until(ExpectedConditions.elementToBeClickable(favoriteTracksMainListenButton));
-        jse.executeScript("$('div.ads-bottom-alone').remove();");
-        for (WebElement track: trackList){
+        removeBanner();
+        for (WebElement track : trackList) {
             jse.executeScript("arguments[0].scrollIntoView(true);", track);
             wait.until(ExpectedConditions.elementToBeClickable(track));
             favoriteTracksNamesList.add(track.findElement(By.xpath(".//a[@itemprop='url']/span")).getText());
@@ -108,26 +108,27 @@ public class MyMusicPage extends Page {
         return favoriteTracksNamesList;
     }
 
-    @Step("Select favorite tracks for delete")
-    public MyMusicPage selectFavoriteTracks(){
-        jse.executeScript("$('div.ads-bottom-alone').remove();");
-        wait.until(ExpectedConditions.elementToBeClickable(checkboxInputForDeleteFavoriteTracks));
-        checkboxInputForDeleteFavoriteTracks.click();
+    @Step("Select checkbox field for delete all favorite tracks")
+    public MyMusicPage selectCheckboxFieldForDeleteAllFavoriteTracks() {
+        removeBanner();
+        wait.until(ExpectedConditions.elementToBeClickable(checkboxFieldForDeleteAllFavoriteTracks));
+        checkboxFieldForDeleteAllFavoriteTracks.click();
         return this;
     }
 
-    @Step("Delete favorite tracks")
-    public MyMusicPage deleteFavoriteTracks(){
+    @Step("Click favorite tracks delete button")
+    public MyMusicPage clickFavoriteTracksDeleteButton() {
         wait.until(ExpectedConditions.elementToBeClickable(deleteTracksButton));
         deleteTracksButton.click();
         return this;
     }
 
-    @Step("Confirm delete favorite tracks")
-    public void confirmDeleteFavoriteTracks(){
+    @Step("Accept alert for delete favorite tracks")
+    public void acceptAlertForDeleteFavoriteTracks() {
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
-        wait.until(ExpectedConditions.not(ExpectedConditions.alertIsPresent()));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'sortable cell-date')]")));
+        waitForXHRRequestsLoaded();
         driver.navigate().refresh();
     }
 

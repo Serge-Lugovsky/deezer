@@ -18,7 +18,7 @@ public class PageManager {
     ChannelsPage channelsPage;
 
 
-    PageManager(WebDriver driver){
+    PageManager(WebDriver driver) {
         this.driver = driver;
         homePage = initElements(new HomePage(this));
         loginPage = initElements(new LoginPage(this));
@@ -30,12 +30,12 @@ public class PageManager {
         channelsPage = initElements(new ChannelsPage(this));
     }
 
-    private <T extends Page> T initElements(T page){
+    private <T extends Page> T initElements(T page) {
         PageFactory.initElements(driver, page);
         return page;
     }
 
-    public WebDriver getDriver(){
+    public WebDriver getDriver() {
         return driver;
     }
 }

@@ -16,9 +16,9 @@ public class AllureEnvironmentWriter {
 
         allureEnvironmentWriter(
                 ImmutableMap.<String, String>builder()
-                        .put("Browser", browserName +" "+ browserVersion)
+                        .put("Browser", browserName + " " + browserVersion)
                         .put("Test site", PropertyLoader.loadProperty("BASE_URL"))
-                        .put("OS", System.getProperty("os.name") +" "+ System.getProperty("os.version") +" "+
+                        .put("OS", System.getProperty("os.name") + " " + System.getProperty("os.version") + " " +
                                 System.getProperty("os.arch"))
                         .put("java.version", System.getProperty("java.version"))
                         .put("Maven.version", PropertyLoader.loadProperty("maven.version"))

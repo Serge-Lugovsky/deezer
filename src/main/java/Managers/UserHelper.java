@@ -11,12 +11,12 @@ import static Base.TestBase.getBaseUser;
 
 public class UserHelper extends PageManager {
 
-    UserHelper(AppManager manager){
+    UserHelper(AppManager manager) {
         super(manager.getDriver());
     }
 
     @Step("Login to account")
-    public void loginAs(User user){
+    public void loginAs(User user) {
         loginPage
                 .inputEmail(user.getUserEmail())
                 .inputPassword(user.getUserPassword())
@@ -24,66 +24,61 @@ public class UserHelper extends PageManager {
     }
 
     @Step("Check login was successful")
-    public boolean checkLogin(){
-        return mainPage.verifyLogin();
+    public boolean checkLogin() {
+        return mainPage.verifyLoginButtonIsDisplayed();
     }
 
     @Step("Check logout was successful")
-    public boolean checkLogout(){
-        return homePage.verifyLogout();
+    public boolean checkLogout() {
+        return homePage.verifyLogoutButtonIsDisplayed();
     }
 
     @Step("Create playlist {name}")
-    public void createPlaylist(String name, String desc){
+    public void createPlaylist(String name, String desc) {
         myMusicPage
                 .openCreatePlaylistPopup()
                 .inputPlaylistName(name)
                 .inputPlaylistDescriptions(desc)
-                .clickCreatePlaylist();
-    }
-
-    @Step("Logout from account")
-    public void logoutFromAccount(){
-        mainPage
-                .openProfileMenu()
-                .logout();
+                .clickCreatePlaylistButton();
     }
 
     @Step("Search music")
-    public void searchMusic(String searchData){
-        mainPage.searchAnyMusic(searchData);
+    public void searchMusic(String searchData) {
+        mainPage
+                .inputSearchText(searchData)
+                .clickSearchButton();
     }
 
     @Step("Add tracks to favorite")
-    public void addTracksToFavoriteTracks(int sumTracks){
-        searchPage.addSelectedTrackToFavorite(sumTracks);
+    public void addTracksToFavorite(int sumTracksToAdd) {
+        searchPage.addTracksToFavoriteAndSaveTracksNamesToExpected(sumTracksToAdd);
     }
 
-    @Step("Delete favorite tracks")
-    public void deleteTracksFromFavorite(){
+    @Step("Delete tracks from favorite")
+    public void deleteTracksFromFavorite() {
         myMusicPage
-                .selectFavoriteTracks()
-                .deleteFavoriteTracks()
-                .confirmDeleteFavoriteTracks();
+                .selectCheckboxFieldForDeleteAllFavoriteTracks()
+                .clickFavoriteTracksDeleteButton()
+                .acceptAlertForDeleteFavoriteTracks();
     }
 
-    @Step("Add tracks to playlist and save added tracks names")
-    public void addTracksToPlaylistAndSaveTracksName(String playlistName, int elemNmb){
-        searchPage.addTracksToPlaylistAndSaveTracksNames(playlistName, elemNmb);
+    @Step("Add tracks to playlist")
+    public void addTracksToPlaylist(String playlistName, int sumTracksToAdd) {
+        searchPage.addTracksToPlaylistAndSaveTracksNamesToExpected(playlistName, sumTracksToAdd);
     }
 
     @Step("Open playlist")
-    public void openPlaylist(String playlistName){
+    public void openPlaylist(String playlistName) {
         myMusicPage.openCreatedPlaylist(playlistName);
     }
 
     @Step("Save expected chanel link")
-    public void saveExpectedChannelLink(){
+    public void saveExpectedChannelLink() {
         channelsPage.saveExpectedChannelLinkFromPage();
     }
 
-    @Step("Get user personal data")
-    public static List<String> USER_PERSONAL_DATA(){
+    @Step("Get expected user personal information")
+    public List<String> getExpectedUserPersonalInformation() {
         List<String> finalUserInfoList = new ArrayList<>();
 
         finalUserInfoList.add(getBaseUser().getGender());

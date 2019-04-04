@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends Page {
 
-    public LoginPage(PageManager pages){
+    public LoginPage(PageManager pages) {
         super(pages);
     }
 
@@ -18,11 +18,11 @@ public class LoginPage extends Page {
     @FindBy(xpath = "(//input)[2]")
     private WebElement passwordField;
 
-    @FindBy(xpath = "//button[@id='login_form_submit']")
+    @FindBy(id = "login_form_submit")
     private WebElement loginButton;
 
     @Step("Entry email")
-    public LoginPage inputEmail(String email){
+    public LoginPage inputEmail(String email) {
         wait.until(ExpectedConditions.elementToBeClickable(emailField));
         emailField.clear();
         emailField.sendKeys(email);
@@ -30,7 +30,7 @@ public class LoginPage extends Page {
     }
 
     @Step("Entry password")
-    public LoginPage inputPassword(String password){
+    public LoginPage inputPassword(String password) {
         wait.until(ExpectedConditions.elementToBeClickable(passwordField));
         passwordField.clear();
         passwordField.sendKeys(password);
@@ -38,7 +38,7 @@ public class LoginPage extends Page {
     }
 
     @Step("Click login button")
-    public void clickLogin(){
+    public void clickLogin() {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
     }

@@ -8,91 +8,90 @@ import java.util.List;
 
 public class AttributeHelper extends PageManager {
 
-    AttributeHelper(AppManager manager){
+    AttributeHelper(AppManager manager) {
         super(manager.getDriver());
     }
 
-    @Step("Get actual user personal information list")
-    public List<String> getActualUserInfoList(){
-        return accountPage.getAllUserInputData();
+    @Step("Get actual user personal information")
+    public List<String> getActualUserPersonalInformation() {
+        return accountPage.getActualUserPersonalInformation();
     }
 
-    @Step("Get name of created playlist")
-    public String getNameOfCreatedPlaylist(){
-        return playListPage.getPlaylistName();
+    @Step("Get playlist name")
+    public String getPlaylistName() {
+        return playListPage.getNameOfCreatedPlaylist();
     }
 
     @Step("Get search confirm result text")
-    public String getSearchConfirmText(){
+    public String getSearchConfirmText() {
         return searchPage.getSearchResultText();
     }
 
-    @Step("Get name artist after search")
-    public String getNameArtist(){
+    @Step("Get artist name after search")
+    public String getArtistName() {
         return searchPage.getArtistNameAfterSearch();
     }
 
-    @Step("Get all user playlist names")
-    public List<String> getListOfPlaylistNames(){
-        return myMusicPage.getListPlaylistName();
+    @Step("Get all playlists names")
+    public List<String> getAllPlaylistsNames() {
+        return myMusicPage.getAllPlaylistsNames();
     }
 
     @Step("Get actual favorite tracks names")
-    public List<String> getActualListFavoriteTracksNames(){
+    public List<String> getActualFavoriteTracksNames() {
         return myMusicPage.getActualFavoriteTracksNames();
     }
 
     @Step("Get expected favorite tracks names")
-    public List<String> getExpectedListFavoriteTracksNames(){
+    public List<String> getExpectedFavoriteTracksNames() {
         return searchPage.getExpectedFavoriteTracksNames();
     }
 
-    @Step("Get actual playlist total tracks")
-    public List<String> getActualTracksInPlaylist(){
-        return playListPage.getActualListTracksInPlaylist();
+    @Step("Get actual tracks in playlist")
+    public List<String> getActualTracksInPlaylist() {
+        return playListPage.getActualTracksNamesInPlaylist();
     }
 
-    @Step("Get expected playlist total tracks")
-    public List<String> getExpectedTracksInPlaylist(){
-        return searchPage.getExpectedListTracksAddedToPlaylist();
+    @Step("Get expected tracks in playlist")
+    public List<String> getExpectedTracksInPlaylist() {
+        return searchPage.getExpectedTracksNamesInPlaylist();
     }
 
-    @Step("Get expected playlist total duration")
-    public LocalTime getDurationPlaylistExpected(){
-        return playListPage.getPlaylistExpectedDuration();
+    @Step("Get expected playlist duration")
+    public LocalTime getExpectedPlaylistDuration() {
+        return playListPage.getExpectedPlaylistDuration();
     }
 
-    @Step("Get actual playlist total duration")
-    public LocalTime getDurationPlaylistActual(){
-        return playListPage.getPlaylistActualDuration();
+    @Step("Get actual playlist duration")
+    public LocalTime getActualPlaylistDuration() {
+        return playListPage.getActualPlaylistDuration();
     }
 
     @Step("Get actual channel link")
-    public String getActualChannelLink(){
+    public String getActualChannelLink() {
         return channelsPage.getActualChannelLink();
     }
 
     @Step("Get expected channel link")
-    public String getExpectedChannelLink(){
+    public String getExpectedChannelLink() {
         return channelsPage.getExpectedChannelLink();
     }
 
-    @Step("Get actual track name from context menu")
-    public String getActualTrackNameFromContextMenu(){
+    @Step("Get actual track name from track context menu")
+    public String getActualTrackNameFromContextMenu() {
         return playListPage
                 .openTrackContextMenu()
-                .getActualNameTrackFromContextMenu();
+                .getActualTrackNameFromContextMenu();
     }
 
-    @Step("Get expected track name in context menu")
-    public String getExpectedTrackNameFromPage(){
-        return playListPage
-                .getExpectedNameTrackFromPage();
+    @Step("Get expected track name from page")
+    public String getExpectedTrackNameFromPage() {
+        return playListPage.getExpectedTrackNameFromPage();
     }
 
     @Step("Save expected track name from page")
-    public void saveExpectedTrackName(){
-        playListPage.saveExpectedNameTrack();
+    public void saveExpectedTrackName() {
+        playListPage.saveExpectedTrackName();
     }
 
 }

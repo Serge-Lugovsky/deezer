@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Deezer" verbose="1">
-    <test name="Check user information test">
+    <test name="User information test">
         <classes>
             <class name="UserInfoTest">
                 <methods>
@@ -11,7 +11,7 @@
             </class>
         </classes>
     </test>
-    <test name="Check search test">
+    <test name="Search test">
         <classes>
             <class name="SearchTest">
                 <methods>
@@ -20,7 +20,7 @@
             </class>
         </classes>
     </test>
-    <test name="Check playlist test">
+    <test name="Playlist test">
         <classes>
             <class name="PlaylistTest">
                 <methods>
@@ -43,7 +43,7 @@
             </class>
         </classes>
     </test>
-    <test name="ChannelTest">
+    <test name="Channel test">
         <classes>
             <class name="ChannelTest">
                 <methods>
