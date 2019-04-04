@@ -20,10 +20,10 @@ public class MainPage extends Page {
     @FindBy(xpath = "//a[@href='/account']")
     private WebElement accountSettingsLink;
 
-    @FindBy(xpath = "(//a[contains(@class,'sidebar-nav-link')])[5]")
+    @FindBy(xpath = "(//a[contains(@class,'sidebar-nav-link')])[4]")
     private WebElement favoriteTracksMenuLink;
 
-    @FindBy(xpath = "(//a[contains(@class,'sidebar-nav-link')])[6]")
+    @FindBy(xpath = "(//a[contains(@class,'sidebar-nav-link')])[5]")
     private WebElement playlistsMenuButton;
 
     @FindBy(xpath = "//input[@type='search']")
